@@ -127,11 +127,7 @@ stages {
             }
 
         }
-
-        stage('Deploiement db en dev'){
-
-        }
-
+        
         stage('Deploiement db en dev'){
             parallel {
                 stage('Deploiement en dev cast db app'){
