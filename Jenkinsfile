@@ -194,7 +194,7 @@ stages {
                                 cp cast/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app cast --values=values.yml --namespace dev
+                                helm upgrade --install cast cast --values=values.yml --namespace dev
                                 '''
                                 }
                             }
@@ -216,7 +216,7 @@ stages {
                                 cp movie/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app movie --values=values.yml --namespace dev
+                                helm upgrade --install movie movie --values=values.yml --namespace dev
                                 '''
                                 }
                             }
@@ -265,7 +265,7 @@ stages {
                                 cp castdb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app castdb --values=values.yml --namespace qa
+                                helm upgrade --install castdb castdb --values=values.yml --namespace qa
                                 '''
                                 }
                             }
@@ -287,7 +287,7 @@ stages {
                                 cp moviedb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app moviedb --values=values.yml --namespace qa
+                                helm upgrade --install moviedb moviedb --values=values.yml --namespace qa
                                 '''
                                 }
                             }
@@ -313,7 +313,7 @@ stages {
                                 cp cast/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app cast --values=values.yml --namespace qa
+                                helm upgrade --install cast cast --values=values.yml --namespace qa
                                 '''
                                 }
                             }
@@ -335,7 +335,7 @@ stages {
                                 cp movie/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app movie --values=values.yml --namespace qa
+                                helm upgrade --install movie movie --values=values.yml --namespace qa
                                 '''
                                 }
                             }
@@ -383,7 +383,7 @@ stages {
                                 cp castdb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app castdb --values=values.yml --namespace staging
+                                helm upgrade --install castdb castdb --values=values.yml --namespace staging
                                 '''
                                 }
                             }
@@ -405,7 +405,7 @@ stages {
                                 cp moviedb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app moviedb --values=values.yml --namespace staging
+                                helm upgrade --install moviedb moviedb --values=values.yml --namespace staging
                                 '''
                                 }
                             }
@@ -431,7 +431,7 @@ stages {
                                 cp cast/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app cast --values=values.yml --namespace staging
+                                helm upgrade --install cast cast --values=values.yml --namespace staging
                                 '''
                                 }
                             }
@@ -453,7 +453,7 @@ stages {
                                 cp movie/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app movie --values=values.yml --namespace staging
+                                helm upgrade --install movie movie --values=values.yml --namespace staging
                                 '''
                                 }
                             }
@@ -503,7 +503,7 @@ stages {
                                 cp castdb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app castdb --values=values.yml --namespace prod
+                                helm upgrade --install castdb castdb --values=values.yml --namespace prod
                                 '''
                                 }
                             }
@@ -528,7 +528,7 @@ stages {
                                 cp moviedb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app moviedb --values=values.yml --namespace prod
+                                helm upgrade --install moviedb moviedb --values=values.yml --namespace prod
                                 '''
                                 }
                             }
@@ -557,7 +557,7 @@ stages {
                                 cp cast/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app cast --values=values.yml --namespace prod
+                                helm upgrade --install cast cast --values=values.yml --namespace prod
                                 '''
                                 }
                             }
@@ -582,7 +582,7 @@ stages {
                                 cp movie/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app movie --values=values.yml --namespace prod
+                                helm upgrade --install movie movie --values=values.yml --namespace prod
                                 '''
                                 }
                             }
