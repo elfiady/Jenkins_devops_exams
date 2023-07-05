@@ -595,7 +595,7 @@ stages {
             }
         }
 
-        tage('Deploiement en prod nginx app'){
+        stage('Deploiement en prod nginx app'){
             environment
                         {
                         KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
