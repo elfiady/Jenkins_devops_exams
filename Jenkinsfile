@@ -84,7 +84,20 @@ stages {
                         }
                 }
             }
-         }       
+         }
+
+         stage(' Docker run ngnix '){
+            steps {
+                            script {
+                            sh '''
+                            docker rm -f nginx
+                            docker run -d -p 8088:8080 --volume ./nginx_config.conf:/etc/nginx/conf.d/default.conf --name nginx nginx:latest
+                            sleep 10
+                            '''
+                            }
+                }
+
+        }       
 
         stage('Test Acceptance'){ // we launch the curl command to validate that the container responds to the request
             steps {
@@ -116,6 +129,10 @@ stages {
         }
 
         stage('Deploiement db en dev'){
+
+        }
+
+        stage('Deploiement db en dev'){
             parallel {
                 stage('Deploiement en dev cast db app'){
                         environment
@@ -132,7 +149,7 @@ stages {
                                 cp castdb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app castdb --values=values.yml --namespace dev
+                                helm upgrade --install castdb castdb --values=values.yml --namespace dev
                                 '''
                                 }
                             }
@@ -154,7 +171,7 @@ stages {
                                 cp moviedb/values.yaml values.yml
                                 cat values.yml
                                 sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
-                                helm upgrade --install app moviedb --values=values.yml --namespace dev
+                                helm upgrade --install moviedb moviedb --values=values.yml --namespace dev
                                 '''
                                 }
                             }
@@ -163,7 +180,8 @@ stages {
             }
         }        
 
-        stage(' Deploiement en dev'){
+        stage(' Deploiement app en dev'){
+
             parallel {
                 stage('Deploiement en dev cast app'){
                         environment
@@ -209,6 +227,29 @@ stages {
 
                 }
             }
+
+
+        }
+
+        stage('Deploiement en dev nginx app'){
+            environment
+                        {
+                        KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
+                        }
+                            steps {
+                                script {
+                                sh '''
+                                rm -Rf .kube
+                                mkdir .kube
+                                ls
+                                cat $KUBECONFIG > .kube/config
+                                cp nginx/values.yaml values.yml
+                                cat values.yml
+                                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+                                helm upgrade --install nginx nginx --values=values.yml --namespace dev
+                                '''
+                                }
+                            }
         }            
 
         stage(' Deploiement db en qa'){
@@ -259,7 +300,7 @@ stages {
             }
         }        
 
-        stage(' Deploiement en qa'){
+        stage(' Deploiement app en qa'){
             parallel {
                 stage('Deploiement en qa cast app'){
                         environment
@@ -305,7 +346,28 @@ stages {
 
                 }
             }
-        }       
+        }
+
+          stage('Deploiement en qa nginx app'){
+            environment
+                        {
+                        KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
+                        }
+                            steps {
+                                script {
+                                sh '''
+                                rm -Rf .kube
+                                mkdir .kube
+                                ls
+                                cat $KUBECONFIG > .kube/config
+                                cp nginx/values.yaml values.yml
+                                cat values.yml
+                                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+                                helm upgrade --install nginx nginx --values=values.yml --namespace qa
+                                '''
+                                }
+                            }
+          }           
 
 
         stage(' Deploiement db en staging'){
@@ -403,6 +465,27 @@ stages {
                 }
             }
         }
+
+          stage('Deploiement en staging nginx app'){
+            environment
+                        {
+                        KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
+                        }
+                            steps {
+                                script {
+                                sh '''
+                                rm -Rf .kube
+                                mkdir .kube
+                                ls
+                                cat $KUBECONFIG > .kube/config
+                                cp nginx/values.yaml values.yml
+                                cat values.yml
+                                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+                                helm upgrade --install nginx nginx --values=values.yml --namespace staging
+                                '''
+                                }
+                            }
+        }    
 
         stage(' Deploiement db en prod'){
             parallel {
@@ -511,5 +594,26 @@ stages {
                 }
             }
         }
+
+        tage('Deploiement en prod nginx app'){
+            environment
+                        {
+                        KUBECONFIG = credentials("config") // we retrieve  kubeconfig from secret file called config saved on jenkins
+                        }
+                            steps {
+                                script {
+                                sh '''
+                                rm -Rf .kube
+                                mkdir .kube
+                                ls
+                                cat $KUBECONFIG > .kube/config
+                                cp nginx/values.yaml values.yml
+                                cat values.yml
+                                sed -i "s+tag.*+tag: ${DOCKER_TAG}+g" values.yml
+                                helm upgrade --install nginx nginx --values=values.yml --namespace prod
+                                '''
+                                }
+                            }
+        }    
 }
 }
