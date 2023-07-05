@@ -15,7 +15,7 @@ stages {
                             script {
                             sh '''
                             docker rm -f movie_db
-                            docker run -d --volume postgres_data_movie:/var/lib/postgresql/data/ -e POSTGRES_USER='movie_db_username' -e POSTGRES_PASSWORD='movie_db_password' -e POSTGRES_DB='movie_db_dev '--name movie_db postgres:12.1-alpine
+                            docker run -d --volume postgres_data_movie:/var/lib/postgresql/data/ -e POSTGRES_USER='movie_db_username' -e POSTGRES_PASSWORD='movie_db_password' -e POSTGRES_DB='movie_db_dev' --name movie_db postgres:12.1-alpine
                             sleep 10
                             '''
                             }
