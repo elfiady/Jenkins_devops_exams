@@ -42,7 +42,7 @@ stages {
                         script {
                         sh '''
                         docker rm -f cast_service
-                        docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG ./cast-service/Dockerfile
+                        docker build -t $DOCKER_ID/$DOCKER_IMAGE_CAST:$DOCKER_TAG ./cast-service/
                         sleep 6
                         '''
                         }
@@ -53,7 +53,7 @@ stages {
                         script {
                         sh '''
                         docker rm -f movie_service
-                        docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG ./movie-service/Dockerfile
+                        docker build -t $DOCKER_ID/$DOCKER_IMAGE_MOVIE:$DOCKER_TAG ./movie-service/
                         sleep 6
                         '''
                         }
